@@ -1,0 +1,36 @@
+version: 2
+
+run:
+  timeout: 3m
+
+formatters:
+  enable:
+    - gofmt
+    - goimports
+    - golines
+
+  settings:
+    golines:
+      max-len: 100
+      tab-len: 4
+      shorten-comments: true
+      reformat-tags: true
+
+# Keep your linters separate from formatting
+linters:
+  settings:
+    revive:
+      enable-all-rules: false
+      rules:
+        - name: line-length-limit
+          arguments: [100]
+        - name: early-return
+        - name: indent-error-flow
+        - name: exported
+          disabled: true
+  enable:
+    - govet
+    - errcheck
+    - staticcheck
+    - ineffassign
+    - revive
